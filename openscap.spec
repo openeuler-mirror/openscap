@@ -1,10 +1,10 @@
 Name:                      openscap
-Version:                   1.3.0_alpha2
-Release:                   3
+Version:                   1.3.2
+Release:                   4
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
-Source0:                   https://github.com/OpenSCAP/%{name}/releases/download/%{version}/%{name}-%{version}.tar.gz
+Source0:                   https://github.com/OpenSCAP/openscap/archive/%{version}.tar.gz
 
 BuildRequires:             cmake >= 2.6 gcc gcc-c++ swig libxml2-devel libxslt-devel perl-generators perl-XML-Parser
 BuildRequires:             rpm-devel libgcrypt-devel pcre-devel libacl-devel libselinux-devel libcap-devel libblkid-devel
@@ -19,8 +19,8 @@ Requires:                  libcurl >= 7.12.0 rpmdevtools rpm-build
 Provides:                  %{name}-scanner = %{version}-%{release} %{name}-utils = %{version}-%{release}
 Provides:                  %{name}-engine-sce = %{version}-%{release} %{name}-containers = %{version}-%{release}
 
-Obsoletes:                 python2-openscap openscap-content-sectool openscap-extra-probes
-Obsoletes:                 openscap-selinux openscap-selinux-compat openscap-extra-probes-sql
+Obsoletes:                 python2-openscap < %{version}-%{release} openscap-content-sectool < %{version}-%{release} openscap-extra-probes < %{version}-%{release}
+Obsoletes:                 openscap-selinux < %{version}-%{release} openscap-selinux-compat < %{version}-%{release} openscap-extra-probes-sql < %{version}-%{release}
 Obsoletes:                 %{name}-containers < %{version}-%{release} %{name}-utils < %{version}-%{release}
 Obsoletes:                 %{name}-engine-sce < %{version}-%{release} %{name}-scanner < %{version}-%{release}
 
@@ -65,11 +65,11 @@ This package includes help documentation and manuals related to openscap.
 
 %prep
 %autosetup -n %{name}-%{version} -p1
+mkdir -p build
 
 %build
-install -d build
 cd build
-%cmake -DENABLE_SCE=TRUE ..
+%cmake -DENABLE_DOCS=ON ..
 %make_build
 make docs
 
@@ -83,9 +83,6 @@ cd build
 %make_install
 
 %delete_la
-
-chrpath -d %{buildroot}/%{_libdir}/libopenscap.so.24.0.0
-chrpath -d %{buildroot}/%{_bindir}/oscap
 
 pathfix.py -i %{__python3} -p -n $RPM_BUILD_ROOT%{_bindir}/scap-as-rpm
 
@@ -126,10 +123,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files help
 %doc AUTHORS NEWS README.md docs/oscap-scan.cron
-%doc %{_pkgdocdir}/manual/
-%doc %{_pkgdocdir}/html/
+%{_pkgdocdir}/manual/*
+%{_pkgdocdir}/html/*
 %{_mandir}/man8/*
 
 %changelog
+* Sat Feb 29 2020 lihao <lihao129@huawei.com> - 1.3.2-4
+- Fix incompatible with rpm-devel-4.15
+
 * Wed Oct 16 2019 dongjian <dongjian13@huawei.com> - 1.3.0_alpha2-3
 - Package init
