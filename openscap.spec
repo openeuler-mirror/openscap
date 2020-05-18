@@ -1,6 +1,6 @@
 Name:                      openscap
 Version:                   1.3.2
-Release:                   5
+Release:                   6
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
@@ -128,6 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Mon May 18 2020 wangchen <wangchen137@huawei.com> 1.3.2-6
+- rebuild for openscap
+
 * Wed Mar 11 2020 Senlin Xia <xiasenlin1@huawei.com> 1.3.2-5
 - Fix scap-workbench compilation failure: declaration of 'operator' as parameter in oval_definitions.h
 
