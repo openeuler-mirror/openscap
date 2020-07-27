@@ -1,11 +1,10 @@
 Name:                      openscap
-Version:                   1.3.2
-Release:                   5
+Version:                   1.3.3
+Release:                   1
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
 Source0:                   https://github.com/OpenSCAP/openscap/archive/%{version}.tar.gz
-Patch9000:                 Fix-scap_workbench-builderror.patch
 BuildRequires:             cmake >= 2.6 gcc gcc-c++ swig libxml2-devel libxslt-devel perl-generators perl-XML-Parser
 BuildRequires:             rpm-devel libgcrypt-devel pcre-devel libacl-devel libselinux-devel libcap-devel libblkid-devel
 BuildRequires:             bzip2-devel asciidoc openldap-devel GConf2-devel dbus-devel chrpath libcurl-devel >= 7.12.0
@@ -128,6 +127,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Mon Jul 27 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.3.3-1
+- update package
+
 * Wed Mar 11 2020 Senlin Xia <xiasenlin1@huawei.com> 1.3.2-5
 - Fix scap-workbench compilation failure: declaration of 'operator' as parameter in oval_definitions.h
 
