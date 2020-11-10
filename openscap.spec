@@ -1,6 +1,6 @@
 Name:                      openscap
 Version:                   1.3.2
-Release:                   7
+Release:                   8
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
@@ -15,7 +15,7 @@ BuildRequires:             perl-XML-XPath bzip2
 %endif
 
 Requires:                  libcurl >= 7.12.0 rpmdevtools rpm-build
-
+Requires:                  %{name}-help = %{version}-%{release}
 Provides:                  %{name}-scanner = %{version}-%{release} %{name}-utils = %{version}-%{release}
 Provides:                  %{name}-engine-sce = %{version}-%{release} %{name}-containers = %{version}-%{release}
 
@@ -128,6 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Fri Nov 06 2020 caodongxia <caodongxia@huawei.com> - 1.3.2-8
+- Add install requires help package into main package
+
 * Tue Aug 18 2020 liquor <lirui130@huawei.com> - 1.3.2-7
 - rebuild for requirement package update
 
