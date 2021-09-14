@@ -1,6 +1,6 @@
 Name:                      openscap
 Version:                   1.3.3
-Release:                   1
+Release:                   2
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
@@ -85,6 +85,17 @@ cd build
 
 pathfix.py -i %{__python3} -p -n $RPM_BUILD_ROOT%{_bindir}/scap-as-rpm
 
+cd  $RPM_BUILD_ROOT/usr
+file `find -type f`| grep -w ELF | awk -F":" '{print $1}' | for i in `xargs`
+do
+  chrpath -d $i
+done
+cd -
+
+mkdir -p  $RPM_BUILD_ROOT/etc/ld.so.conf.d
+echo "%{_bindir}/%{name}" > $RPM_BUILD_ROOT/etc/ld.so.conf.d/%{name}-%{_arch}.conf
+echo "%{_libdir}/%{name}" >> $RPM_BUILD_ROOT/etc/ld.so.conf.d/%{name}-%{_arch}.conf
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/openscap/cpe/*
 
 %{_sysconfdir}/bash_completion.d
+%config(noreplace) /etc/ld.so.conf.d/*
 
 %files devel
 %{_libdir}/libopenscap.so
@@ -127,6 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Mon Sep 13 2021 chenchen <chen_aka_jan@163.com> - 1.3.3-2
+- del rpath for some binaries and bin
+
 * Mon Jul 27 2020 openEuler Buildteam <buildteam@openeuler.org> - 1.3.3-1
 - update package
 
