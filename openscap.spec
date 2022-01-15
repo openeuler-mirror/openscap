@@ -1,6 +1,6 @@
 Name:                      openscap
-Version:                   1.3.3
-Release:                   2
+Version:                   1.3.5
+Release:                   1
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
@@ -8,6 +8,7 @@ Source0:                   https://github.com/OpenSCAP/openscap/archive/%{versio
 BuildRequires:             cmake >= 2.6 gcc gcc-c++ swig libxml2-devel libxslt-devel perl-generators perl-XML-Parser
 BuildRequires:             rpm-devel libgcrypt-devel pcre-devel libacl-devel libselinux-devel libcap-devel libblkid-devel
 BuildRequires:             bzip2-devel asciidoc openldap-devel GConf2-devel dbus-devel chrpath libcurl-devel >= 7.12.0
+BuildRequires:             make glib2-devel libyaml-devel xmlsec1-devel xmlsec1-openssl-devel perl-XML-XPath bzip2
 
 %if %{?_with_check:1}%{!?_with_check:0}
 BuildRequires:             perl-XML-XPath bzip2
@@ -139,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Fri Jan 14 2022 wulei <wulei80@huawei.com> - 1.3.5-1
+- Package update
+
 * Mon Sep 13 2021 chenchen <chen_aka_jan@163.com> - 1.3.3-2
 - del rpath for some binaries and bin
 
