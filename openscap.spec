@@ -1,10 +1,13 @@
 Name:                      openscap
-Version:                   1.3.6
+Version:                   1.3.7
 Release:                   1
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
 Source0:                   https://github.com/OpenSCAP/openscap/archive/%{version}.tar.gz
+# include <rpm/rpmcrypto.h> in rpm-helper.h
+# Reported upstream in https://github.com/OpenSCAP/openscap/pull/1922
+Patch0:		           https://github.com/OpenSCAP/openscap/pull/1922.patch#/0001-Fix-compile-error-with-future-versions-of-gcc.patch
 BuildRequires:             cmake >= 2.6 gcc gcc-c++ swig libxml2-devel libxslt-devel perl-generators perl-XML-Parser
 BuildRequires:             rpm-devel libgcrypt-devel pcre-devel libacl-devel libselinux-devel libcap-devel libblkid-devel
 BuildRequires:             bzip2-devel asciidoc openldap-devel GConf2-devel dbus-devel chrpath libcurl-devel >= 7.12.0
@@ -142,6 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Fri Feb 03 2023 wangkai <wangkai385@h-partners.com> - 1.3.7-1
+- Update to version 1.3.7
+
 * Tue May 17 2022 wulei <wulei80@h-partners.com> - 1.3.6-1
 - Update package
 
