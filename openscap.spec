@@ -1,6 +1,6 @@
 Name:                      openscap
 Version:                   1.3.7
-Release:                   1
+Release:                   2
 Summary:                   An open source framework in order to provide a interface for using scap
 License:                   LGPLv2+
 URL:                       http://www.open-scap.org
@@ -71,6 +71,10 @@ This package includes help documentation and manuals related to openscap.
 mkdir -p build
 
 %build
+%if "%toolchain" == "clang"
+	export CFLAGS="$CFLAGS -Wno-int-conversion"
+	export CXXFLAGS="$CXXFLAGS -Wno-int-conversion"
+%endif
 cd build
 %cmake -DENABLE_DOCS=ON ..
 %make_build
@@ -145,6 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/*
 
 %changelog
+* Sat May 06 2023 yoo <sunyuechi@iscas.ac.cn> - 1.3.7-2
+- fix clang build error
+
 * Fri Feb 03 2023 wangkai <wangkai385@h-partners.com> - 1.3.7-1
 - Update to version 1.3.7
 
