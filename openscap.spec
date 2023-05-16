@@ -72,8 +72,8 @@ mkdir -p build
 
 %build
 %if "%toolchain" == "clang"
-	export CFLAGS="$CFLAGS -Wno-int-conversion"
-	export CXXFLAGS="$CXXFLAGS -Wno-int-conversion"
+	export CFLAGS="$CFLAGS -Wno-error=int-conversion"
+	export CXXFLAGS="$CXXFLAGS -Wno-error=int-conversion"
 %endif
 cd build
 %cmake -DENABLE_DOCS=ON ..
